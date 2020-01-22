@@ -25,15 +25,22 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	compile group: 'org.ehcache', name: 'ehcache', version: '3.8.1'
+
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'junit', module: 'junit' //by both name and group
 	}
-	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+
+	//https://stackoverflow.com/questions/57434659/interaction-between-spring-boot-and-junit-5-must-use-the-overall-artifacts-no
+	//testCompile 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+	//testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
+	testImplementation('org.junit.jupiter:junit-jupiter:5.6.0')
 	testCompile group: 'com.h2database', name: 'h2', version: '1.4.200'
 }
 
