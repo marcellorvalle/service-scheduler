@@ -10,4 +10,9 @@ class SchedulerApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void textMisc()  {
+
+	}
+
 }
