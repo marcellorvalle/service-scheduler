@@ -11,7 +11,7 @@ class SchedulerApplicationTests {
 	}
 
 	@Test
-	void textMisc()  {
+	void testMisc()  {
 
 	}
 
