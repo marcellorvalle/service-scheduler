@@ -12,7 +12,8 @@ class MetadataKey implements Serializable {
 
     private MetadataKey(
             String filterName,
-            Class<? extends SpecificationBuilder> forClass) {
+            Class<? extends SpecificationBuilder> forClass
+    ) {
         this.filterName = filterName;
         this.forClass = forClass;
     }

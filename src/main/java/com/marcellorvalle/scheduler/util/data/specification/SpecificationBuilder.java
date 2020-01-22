@@ -1,5 +1,6 @@
 package com.marcellorvalle.scheduler.util.data.specification;
 
+import com.marcellorvalle.scheduler.util.data.searchfilter.SearchFilter;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.MultiValueMap;
 
@@ -15,7 +16,7 @@ public abstract class SpecificationBuilder<T> {
     private final Class<? extends SpecificationBuilder> clazz;
 
     protected Root<T> root;
-    protected CriteriaQuery query;
+    protected CriteriaQuery<T> query;
     protected CriteriaBuilder builder;
 
     private DefaultOperations<T> defaultOperations;
@@ -33,12 +34,17 @@ public abstract class SpecificationBuilder<T> {
         return StringParser.INSTANCE;
     }
 
+    public final Specification<T> apply(SearchFilter filter) {
+        return apply(filter.asMultiValueMap());
+    }
+
+    @SuppressWarnings("unchecked")
     public final Specification<T> apply(MultiValueMap<String, String> filter) {
         this.filters = filter;
 
         return (root, query, criteriaBuilder) -> {
             this.root = root;
-            this.query = query;
+            this.query = (CriteriaQuery<T>) query;
             this.builder = criteriaBuilder;
             this.defaultOperations = new DefaultOperations<>(root, builder);
 

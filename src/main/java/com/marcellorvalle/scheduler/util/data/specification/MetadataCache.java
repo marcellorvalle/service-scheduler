@@ -62,7 +62,8 @@ public class MetadataCache {
 
     private CacheManager buildCacheManager() {
         return CacheManagerBuilder.newCacheManagerBuilder()
-                .withCache(CACHE_NAME,
+                .withCache(
+                        CACHE_NAME,
                         CacheConfigurationBuilder.newCacheConfigurationBuilder(
                                 MetadataKey.class, Metadata.class, ResourcePoolsBuilder.heap(MAX_ELEMENTS))
                 ).build();
