@@ -13,6 +13,7 @@ This is a personal project intended to build a service that will provide schedul
 Desired technical aspects:
 
 - Third party authentication
+- Querydsl
 - GraphQl
 
 Future projects:
