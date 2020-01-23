@@ -77,7 +77,7 @@ public class SearchFilter {
         parameters.addAll(key, Arrays.asList(values));
     }
 
-    private class FilterToString {
+    private static class FilterToString {
         private final StringBuilder builder = new StringBuilder();
 
         @Override
