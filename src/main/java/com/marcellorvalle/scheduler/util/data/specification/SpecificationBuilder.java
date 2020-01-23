@@ -13,18 +13,19 @@ import java.util.*;
 
 public abstract class SpecificationBuilder<T> {
     private final List<Predicate> predicates;
-    private final Class<? extends SpecificationBuilder> clazz;
+    private final Class<? extends SpecificationBuilder<T>> clazz;
 
     protected Root<T> root;
     protected CriteriaQuery<T> query;
     protected CriteriaBuilder builder;
 
     private DefaultOperations<T> defaultOperations;
-    private MultiValueMap<String, String> filters;
+    private SearchFilter filters;
 
+    @SuppressWarnings("unchecked")
     public SpecificationBuilder() {
         predicates = new ArrayList<>();
-        clazz = this.getClass();
+        clazz = (Class<? extends SpecificationBuilder<T>>) this.getClass();
     }
 
     /**
@@ -34,12 +35,13 @@ public abstract class SpecificationBuilder<T> {
         return StringParser.INSTANCE;
     }
 
-    public final Specification<T> apply(SearchFilter filter) {
-        return apply(filter.asMultiValueMap());
+    @SuppressWarnings("unchecked")
+    public final Specification<T> apply(MultiValueMap<String, String> filter) {
+        return apply(SearchFilter.from(filter));
     }
 
     @SuppressWarnings("unchecked")
-    public final Specification<T> apply(MultiValueMap<String, String> filter) {
+    public final Specification<T> apply(SearchFilter filter) {
         this.filters = filter;
 
         return (root, query, criteriaBuilder) -> {

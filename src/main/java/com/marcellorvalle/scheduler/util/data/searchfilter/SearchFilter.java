@@ -5,6 +5,7 @@ import org.springframework.util.MultiValueMap;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 /**
@@ -37,7 +38,7 @@ public class SearchFilter {
      * Verifica se o parâmetro identificado pela chave tem mais de um valor.
      */
     public boolean hasMultipleValues(String key) {
-        return containsKey(key) ? (get(key).size() > 1) : false;
+        return containsKey(key) && (get(key).size() > 1);
     }
 
     /**
@@ -53,6 +54,10 @@ public class SearchFilter {
 
     public boolean containsKey(String key) {
         return parameters.containsKey(key);        
+    }
+
+    public void forEach(BiConsumer<String, List<String>> action) {
+        parameters.forEach(action);
     }
 
     /**
