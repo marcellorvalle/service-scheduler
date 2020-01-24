@@ -1,6 +1,7 @@
 package com.marcellorvalle.scheduler.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,6 +9,7 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
 @Data
+@ToString
 @MappedSuperclass
 public class Person {
     @Id

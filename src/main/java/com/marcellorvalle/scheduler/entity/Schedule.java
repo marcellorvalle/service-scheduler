@@ -1,9 +1,6 @@
 package com.marcellorvalle.scheduler.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,11 +9,11 @@ import java.time.LocalTime;
 import java.util.Date;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Schedule {
+public class Schedule implements Comparable<Schedule> {
     @Id
     @GeneratedValue
     private Long id;
@@ -31,4 +28,13 @@ public class Schedule {
     private LocalTime end;
     @NotNull
     private Date createdAt;
+
+    @Override
+    public int compareTo(Schedule that) {
+        return this.start.compareTo(that.start);
+    }
+
+    public Long getIdProfessional() {
+        return professional.getId();
+    }
 }

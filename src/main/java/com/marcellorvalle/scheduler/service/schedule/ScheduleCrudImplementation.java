@@ -4,7 +4,7 @@ import com.marcellorvalle.scheduler.entity.Professional;
 import com.marcellorvalle.scheduler.entity.Schedule;
 import com.marcellorvalle.scheduler.repository.ScheduleRepository;
 import com.marcellorvalle.scheduler.util.exception.http.ResourceNotFoundException;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
@@ -12,14 +12,9 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 class ScheduleCrudImplementation implements ScheduleCrud {
     private final ScheduleRepository repository;
-
-    @Override
-    public Schedule save(Schedule schedule) {
-        return repository.save(schedule);
-    }
 
     @Override
     public Schedule findById(long id) {
@@ -33,13 +28,6 @@ class ScheduleCrudImplementation implements ScheduleCrud {
         repository.delete(schedule);
     }
 
-    List<Schedule> findOtherSchedules(Schedule schedule) {
-        return findByProfessionalAndDay(
-                Objects.requireNonNull(schedule.getProfessional()),
-                schedule.getDayOfWeek()
-        );
-    }
-
     public List<Schedule> findByProfessionalAndDay(Professional professional, DayOfWeek day) {
         return findByProfessionalAndDay(
                 Objects.requireNonNull(professional.getId()),
@@ -51,4 +39,22 @@ class ScheduleCrudImplementation implements ScheduleCrud {
         return repository.findByProfessionalAndAndDayOfWeek(idProfessional, day);
     }
 
+    Schedule save(Schedule schedule) {
+        return repository.save(schedule);
+    }
+
+    List<Schedule> findOtherSchedules(Schedule schedule) {
+        return findByProfessionalAndDay(
+                Objects.requireNonNull(schedule.getProfessional()),
+                schedule.getDayOfWeek()
+        );
+    }
+
+    void deleteEntireDay(long idProfessional, DayOfWeek day) {
+        repository.deleteEntireDay(idProfessional, day);
+    }
+
+    List<Schedule> saveAll(Iterable<Schedule> schedules) {
+        return repository.saveAll(schedules);
+    }
 }

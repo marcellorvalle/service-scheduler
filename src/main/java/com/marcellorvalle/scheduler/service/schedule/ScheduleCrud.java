@@ -7,8 +7,6 @@ import java.time.DayOfWeek;
 import java.util.List;
 
 public interface ScheduleCrud {
-    Schedule save(Schedule schedule);
-
     Schedule findById(long id);
 
     void delete(Schedule schedule);
