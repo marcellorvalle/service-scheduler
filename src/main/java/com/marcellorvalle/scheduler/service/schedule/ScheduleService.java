@@ -1,6 +1,6 @@
 package com.marcellorvalle.scheduler.service.schedule;
 
-import com.marcellorvalle.scheduler.entity.Schedule;
+import com.marcellorvalle.scheduler.entity.ScheduleItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ public class ScheduleService {
         return scheduleCrud;
     }
 
-    List<Schedule> addNewSchedule(Schedule schedule) {
-        return addNewSchedule.execute(schedule);
+    List<ScheduleItem> addNewSchedule(ScheduleItem scheduleItem) {
+        return addNewSchedule.execute(scheduleItem);
     }
 }

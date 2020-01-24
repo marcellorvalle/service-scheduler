@@ -12,5 +12,5 @@ import javax.persistence.ManyToOne;
 @EqualsAndHashCode(callSuper = true)
 public class Professional extends Person {
     @ManyToOne(fetch = FetchType.LAZY)
-    private Schedule schedule;
+    private ScheduleItem scheduleItem;
 }
