@@ -1,17 +1,17 @@
 package com.marcellorvalle.scheduler.service.schedule;
 
 import com.marcellorvalle.scheduler.entity.Professional;
-import com.marcellorvalle.scheduler.entity.Schedule;
+import com.marcellorvalle.scheduler.entity.ScheduleItem;
 
 import java.time.DayOfWeek;
 import java.util.List;
 
 public interface ScheduleCrud {
-    Schedule findById(long id);
+    ScheduleItem findById(long id);
 
-    void delete(Schedule schedule);
+    void delete(ScheduleItem scheduleItem);
 
-    List<Schedule> findByProfessionalAndDay(Professional professional, DayOfWeek day);
+    List<ScheduleItem> findByProfessionalAndDay(Professional professional, DayOfWeek day);
 
-    List<Schedule> findByProfessionalAndDay(long idProfessional, DayOfWeek day);
+    List<ScheduleItem> findByProfessionalAndDay(long idProfessional, DayOfWeek day);
 }

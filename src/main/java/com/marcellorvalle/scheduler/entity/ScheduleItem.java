@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Schedule implements Comparable<Schedule> {
+public class ScheduleItem implements Comparable<ScheduleItem> {
     @Id
     @GeneratedValue
     private Long id;
@@ -30,7 +30,7 @@ public class Schedule implements Comparable<Schedule> {
     private Date createdAt;
 
     @Override
-    public int compareTo(Schedule that) {
+    public int compareTo(ScheduleItem that) {
         return this.start.compareTo(that.start);
     }
 

@@ -34,7 +34,7 @@ public class ConsolidateScheduleTest {
 
         assertArrayEquals(
                 expected.toArray(),
-                consolidadeSchedule.consolidate(input).toArray()
+                consolidadeSchedule.execute(input).toArray()
         );
     }
 
@@ -42,7 +42,7 @@ public class ConsolidateScheduleTest {
     public void testConsolidationEmptyList() {
         assertArrayEquals(
                 Collections.emptyList().toArray(),
-                consolidadeSchedule.consolidate(Collections.emptyList()).toArray()
+                consolidadeSchedule.execute(Collections.emptyList()).toArray()
         );
     }
 }

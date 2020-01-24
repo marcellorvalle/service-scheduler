@@ -1,6 +1,6 @@
 package com.marcellorvalle.scheduler.service.schedule;
 
-import com.marcellorvalle.scheduler.entity.Schedule;
+import com.marcellorvalle.scheduler.entity.ScheduleItem;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,22 +9,22 @@ import java.util.List;
 
 @Service
 class ConsolidateSchedule {
-    List<Schedule> consolidate(List<Schedule> schedules) {
-        if (schedules.isEmpty()) {
+    List<ScheduleItem> execute(List<ScheduleItem> items) {
+        if (items.isEmpty()) {
             return Collections.emptyList();
         }
 
-        var clone = new ArrayList<>(schedules);
-        clone.sort(Schedule::compareTo);
+        var clone = new ArrayList<>(items);
+        clone.sort(ScheduleItem::compareTo);
 
         return mergeOverlaps(clone);
     }
 
-    private List<Schedule> mergeOverlaps(List<Schedule> orderedSchedules) {
-        var merged = orderedSchedules.get(0);
-        var daySchedule = new ArrayList<Schedule>();
+    private List<ScheduleItem> mergeOverlaps(List<ScheduleItem> orderedItems) {
+        var merged = orderedItems.get(0);
+        var daySchedule = new ArrayList<ScheduleItem>();
 
-        for (var schedule: orderedSchedules) {
+        for (var schedule: orderedItems) {
             if (overlaped(merged, schedule)) {
                 merged = join(merged, schedule);
             } else {
@@ -40,14 +40,14 @@ class ConsolidateSchedule {
         return daySchedule;
     }
 
-    private boolean overlaped(Schedule schedule, Schedule other) {
-        return schedule.getStart().compareTo(other.getEnd()) <= 0
-                && schedule.getEnd().compareTo(other.getStart()) >= 0;
+    private boolean overlaped(ScheduleItem item, ScheduleItem other) {
+        return item.getStart().compareTo(other.getEnd()) <= 0
+                && item.getEnd().compareTo(other.getStart()) >= 0;
     }
 
-    private Schedule join(Schedule startSchedule, Schedule endSchedule) {
-        return startSchedule.toBuilder()
-                .end(endSchedule.getEnd())
+    private ScheduleItem join(ScheduleItem startItem, ScheduleItem endItem) {
+        return startItem.toBuilder()
+                .end(endItem.getEnd())
                 .build();
     }
 }

@@ -1,7 +1,7 @@
 package com.marcellorvalle.scheduler.service.schedule;
 
 import com.marcellorvalle.scheduler.entity.Professional;
-import com.marcellorvalle.scheduler.entity.Schedule;
+import com.marcellorvalle.scheduler.entity.ScheduleItem;
 import com.marcellorvalle.scheduler.repository.ScheduleRepository;
 import com.marcellorvalle.scheduler.util.exception.http.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -17,36 +17,36 @@ class ScheduleCrudImplementation implements ScheduleCrud {
     private final ScheduleRepository repository;
 
     @Override
-    public Schedule findById(long id) {
+    public ScheduleItem findById(long id) {
         return repository.findById(id).orElseThrow(
                 () -> ResourceNotFoundException.doThrow("Não foi possível encontrar esse item de agenda!")
         );
     }
 
     @Override
-    public void delete(Schedule schedule) {
-        repository.delete(schedule);
+    public void delete(ScheduleItem scheduleItem) {
+        repository.delete(scheduleItem);
     }
 
-    public List<Schedule> findByProfessionalAndDay(Professional professional, DayOfWeek day) {
+    public List<ScheduleItem> findByProfessionalAndDay(Professional professional, DayOfWeek day) {
         return findByProfessionalAndDay(
                 Objects.requireNonNull(professional.getId()),
                 day
         );
     }
 
-    public List<Schedule> findByProfessionalAndDay(long idProfessional, DayOfWeek day) {
+    public List<ScheduleItem> findByProfessionalAndDay(long idProfessional, DayOfWeek day) {
         return repository.findByProfessionalAndAndDayOfWeek(idProfessional, day);
     }
 
-    Schedule save(Schedule schedule) {
-        return repository.save(schedule);
+    ScheduleItem save(ScheduleItem scheduleItem) {
+        return repository.save(scheduleItem);
     }
 
-    List<Schedule> findOtherSchedules(Schedule schedule) {
+    List<ScheduleItem> findOtherSchedules(ScheduleItem scheduleItem) {
         return findByProfessionalAndDay(
-                Objects.requireNonNull(schedule.getProfessional()),
-                schedule.getDayOfWeek()
+                Objects.requireNonNull(scheduleItem.getProfessional()),
+                scheduleItem.getDayOfWeek()
         );
     }
 
@@ -54,7 +54,7 @@ class ScheduleCrudImplementation implements ScheduleCrud {
         repository.deleteEntireDay(idProfessional, day);
     }
 
-    List<Schedule> saveAll(Iterable<Schedule> schedules) {
+    List<ScheduleItem> saveAll(Iterable<ScheduleItem> schedules) {
         return repository.saveAll(schedules);
     }
 }
