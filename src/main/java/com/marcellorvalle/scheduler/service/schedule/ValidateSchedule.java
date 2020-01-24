@@ -2,7 +2,9 @@ package com.marcellorvalle.scheduler.service.schedule;
 
 import com.marcellorvalle.scheduler.entity.ScheduleItem;
 import com.marcellorvalle.scheduler.util.exception.http.BadRequestException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ValidateSchedule {
     void execute(ScheduleItem scheduleItem) {
         validateInterval(scheduleItem);

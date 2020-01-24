@@ -5,12 +5,13 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Professional extends Person {
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ScheduleItem scheduleItem;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<ScheduleItem> scheduleItems;
 }

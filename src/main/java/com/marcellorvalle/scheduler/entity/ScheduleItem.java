@@ -15,9 +15,9 @@ import java.util.Date;
 @Entity
 public class ScheduleItem implements Comparable<ScheduleItem> {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_schedule")
     private Long id;
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idProfessional")
     private Professional professional;
     @NotNull

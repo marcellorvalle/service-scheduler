@@ -47,6 +47,7 @@ class ConsolidateSchedule {
 
     private ScheduleItem join(ScheduleItem startItem, ScheduleItem endItem) {
         return startItem.toBuilder()
+                .id(null)
                 .end(endItem.getEnd())
                 .build();
     }

@@ -1,11 +1,11 @@
 package com.marcellorvalle.scheduler.service.schedule;
 
 import com.marcellorvalle.scheduler.entity.ScheduleItem;
+import com.marcellorvalle.scheduler.struct.DaySchedule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 /**
  * Add a new schedule performing validation and consolidation
@@ -21,18 +21,19 @@ public class AddNewSchedule {
      * @return The consolidated schedule relative to the DayOfWeek
      */
     @Transactional
-    List<ScheduleItem> execute(ScheduleItem scheduleItem) {
+    DaySchedule execute(ScheduleItem scheduleItem) {
         validateSchedule.execute(scheduleItem);
 
         var others = crud.findOtherSchedules(scheduleItem);
         others.add(scheduleItem);
-
-        var consolidated  = consolidateSchedule.execute(others);
+        var consolidated = consolidateSchedule.execute(others);
 
         crud.deleteEntireDay(
                 scheduleItem.getIdProfessional(), scheduleItem.getDayOfWeek()
         );
 
-        return crud.saveAll(consolidated);
+        return new DaySchedule(
+                crud.saveAll(consolidated)
+        );
     }
 }
