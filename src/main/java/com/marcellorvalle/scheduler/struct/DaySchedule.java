@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * C-like immutable Struct to store all the schedules itens on a day
+ * C-like immutable Struct to store all the schedule items on a day
  */
 public class DaySchedule {
     public final List<ScheduleItem> items;
