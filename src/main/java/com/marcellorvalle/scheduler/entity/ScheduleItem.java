@@ -16,7 +16,7 @@ import java.util.Date;
 public class ScheduleItem implements Comparable<ScheduleItem> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_schedule")
-    private Long id;
+    private Long idSchedule;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idProfessional")
     private Professional professional;
@@ -31,10 +31,10 @@ public class ScheduleItem implements Comparable<ScheduleItem> {
 
     @Override
     public int compareTo(ScheduleItem that) {
-        return this.start.compareTo(that.start);
+        return start.compareTo(that.start);
     }
 
     public Long getIdProfessional() {
-        return professional.getId();
+        return professional.getIdProfessional();
     }
 }

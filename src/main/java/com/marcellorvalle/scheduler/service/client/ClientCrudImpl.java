@@ -3,10 +3,11 @@ package com.marcellorvalle.scheduler.service.client;
 import com.marcellorvalle.scheduler.entity.Client;
 import com.marcellorvalle.scheduler.repository.ClientRepository;
 import com.marcellorvalle.scheduler.util.exception.http.ResourceNotFoundException;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 @Service
 class ClientCrudImpl implements ClientCrud {
     private final ClientRepository repository;

@@ -2,6 +2,7 @@ package com.marcellorvalle.scheduler.service.schedule;
 
 import com.marcellorvalle.scheduler.entity.ScheduleItem;
 import com.marcellorvalle.scheduler.struct.DaySchedule;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +11,8 @@ import javax.transaction.Transactional;
 /**
  * Add a new schedule performing validation and consolidation
  */
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 @Service
-@RequiredArgsConstructor
 public class AddNewSchedule {
     final ScheduleCrudImplementation crud;
     final ConsolidateSchedule consolidateSchedule;

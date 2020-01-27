@@ -11,8 +11,8 @@ import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Objects;
 
-@Service
 @RequiredArgsConstructor
+@Service
 class ScheduleCrudImplementation implements ScheduleCrud {
     private final ScheduleRepository repository;
 
@@ -30,7 +30,7 @@ class ScheduleCrudImplementation implements ScheduleCrud {
 
     public List<ScheduleItem> findByProfessionalAndDay(Professional professional, DayOfWeek day) {
         return findByProfessionalAndDay(
-                Objects.requireNonNull(professional.getId()),
+                Objects.requireNonNull(professional.getIdProfessional()),
                 day
         );
     }
