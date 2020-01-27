@@ -10,7 +10,6 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
 @Data
-@ToString
 @MappedSuperclass
 public class Person {
     @Id
